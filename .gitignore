@@ -1,0 +1,16 @@
+target/
+.project
+.prefs
+.classpath
+.settings/
+lib/
+
+.DS_Store
+
+nb-configuration.xml
+
+# IntelliJ project files
+.idea
+.iml
+out
+gen
