@@ -5,7 +5,7 @@ public class MatcherLauncher {
     public static void main(String[] args) {
         String inputWsdlFolderPath = "src/main/resources/WSDLs";
         String syntacticOutputFilePath = "src/main/output/syntacticOutput.xml";
-        double minMatchScoreThreshold = 0.8;
+        double minMatchScoreThreshold = 0.5d;
         SyntacticMatcher syntacticMatcher = new SyntacticMatcher(inputWsdlFolderPath, syntacticOutputFilePath, minMatchScoreThreshold);
         syntacticMatcher.match();
 
