@@ -496,6 +496,51 @@
         <WsScore>1.0</WsScore>
     </Macthing>
     <Macthing>
+        <OutputServiceName>/Users/manojy/dev/codebase/github/webserviceproject/src/main/resources/SAWSDL/academic-item-number_bookauthor_service.wsdl</OutputServiceName>
+        <InputServiceName>/Users/manojy/dev/codebase/github/webserviceproject/src/main/resources/SAWSDL/agent_movement.wsdl</InputServiceName>
+        <MacthedOperation>
+            <OutputOperationName>get_BOOK_AUTHOR</OutputOperationName>
+            <InputOperationName>getFuturePosition</InputOperationName>
+            <OpScore>0.8</OpScore>
+            <MacthedElement>
+                <OutputElement>AuthorType</OutputElement>
+                <InputElement>AgentType</InputElement>
+                <Score>0.8</Score>
+            </MacthedElement>
+        </MacthedOperation>
+        <WsScore>0.8</WsScore>
+    </Macthing>
+    <Macthing>
+        <OutputServiceName>/Users/manojy/dev/codebase/github/webserviceproject/src/main/resources/SAWSDL/academic-item-number_publicationauthor_service.wsdl</OutputServiceName>
+        <InputServiceName>/Users/manojy/dev/codebase/github/webserviceproject/src/main/resources/SAWSDL/agent_movement.wsdl</InputServiceName>
+        <MacthedOperation>
+            <OutputOperationName>get_PUBLICATION_AUTHOR</OutputOperationName>
+            <InputOperationName>getFuturePosition</InputOperationName>
+            <OpScore>0.8</OpScore>
+            <MacthedElement>
+                <OutputElement>AuthorType</OutputElement>
+                <InputElement>AgentType</InputElement>
+                <Score>0.8</Score>
+            </MacthedElement>
+        </MacthedOperation>
+        <WsScore>0.8</WsScore>
+    </Macthing>
+    <Macthing>
+        <OutputServiceName>/Users/manojy/dev/codebase/github/webserviceproject/src/main/resources/SAWSDL/amount-of-moneycar_pricecompany_service.wsdl</OutputServiceName>
+        <InputServiceName>/Users/manojy/dev/codebase/github/webserviceproject/src/main/resources/SAWSDL/agent_movement.wsdl</InputServiceName>
+        <MacthedOperation>
+            <OutputOperationName>get_PRICE_COMPANY</OutputOperationName>
+            <InputOperationName>getFuturePosition</InputOperationName>
+            <OpScore>0.8</OpScore>
+            <MacthedElement>
+                <OutputElement>CompanyType</OutputElement>
+                <InputElement>AgentType</InputElement>
+                <Score>0.8</Score>
+            </MacthedElement>
+        </MacthedOperation>
+        <WsScore>0.8</WsScore>
+    </Macthing>
+    <Macthing>
         <OutputServiceName>/Users/manojy/dev/codebase/github/webserviceproject/src/main/resources/SAWSDL/_person_MyShopservice.wsdl</OutputServiceName>
         <InputServiceName>/Users/manojy/dev/codebase/github/webserviceproject/src/main/resources/SAWSDL/author_bookprice_service.wsdl</InputServiceName>
         <MacthedOperation>

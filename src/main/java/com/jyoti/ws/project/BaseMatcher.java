@@ -29,8 +29,8 @@ public abstract class BaseMatcher {
         for (String inputFileName : fileNames) {
             for (String outputFileName : fileNames) {
                 if (!inputFileName.equals(outputFileName)) {
-                    MatchedWebServiceType matchedWebServiceType = matchWebServiceOperations(inputFileName, outputFileName);
-                    if (matchedWebServiceType.getWsScore() > minMatchScoreThreshold) {
+                    MatchedWebServiceType matchedWebServiceType = matchWebServiceOperations(inputFileName, outputFileName, minMatchScoreThreshold);
+                    if (matchedWebServiceType.getWsScore() > 0) {
                         wsMatchingType.getMacthing().add(matchedWebServiceType);
                     }
                 }
@@ -54,7 +54,7 @@ public abstract class BaseMatcher {
         JAXBUtils.createOutputFile(wsMatchingType, outputFilePath);
     }
 
-    private MatchedWebServiceType matchWebServiceOperations(String inputFileName, String outputFileName) {
+    private MatchedWebServiceType matchWebServiceOperations(String inputFileName, String outputFileName, double minMatchScoreThreshold) {
         List<Operation> inputOperations = wsOperationsMap.get(inputFileName);
         List<Operation> outputOperations = wsOperationsMap.get(outputFileName);
         MatchedWebServiceType matchedWebServiceType = new MatchedWebServiceType();
@@ -75,19 +75,22 @@ public abstract class BaseMatcher {
 
                         for (Parameter outputParameter : outputOperation.getOutputParameterList()) {
                             double matchingScore = getMatchingScore(inputParameter, outputParameter);
-
-                            if (matchingScore > bestMatchedElement.getScore()) {
-                                bestMatchedElement.setScore(matchingScore);
-                                bestMatchedElement.setOutputElement(outputParameter.name);
+                            if (matchingScore > minMatchScoreThreshold) {
+                                if (matchingScore > bestMatchedElement.getScore()) {
+                                    bestMatchedElement.setScore(matchingScore);
+                                    bestMatchedElement.setOutputElement(outputParameter.name);
+                                }
                             }
                         }
 
-                        allMatchedElements.add(bestMatchedElement);
+                        if (bestMatchedElement.getScore() > minMatchScoreThreshold) {
+                            allMatchedElements.add(bestMatchedElement);
+                        }
                     }
 
                     double operationScore = calculateOperationScore(allMatchedElements);
 
-                    if (operationScore > matchedOperationType.getOpScore()) {
+                    if (operationScore > 0 && operationScore > matchedOperationType.getOpScore()) {
                         matchedOperationType.setOpScore(operationScore);
                         matchedOperationType.setOutputOperationName(outputOperation.getName());
                         matchedOperationType.getMacthedElement().clear();

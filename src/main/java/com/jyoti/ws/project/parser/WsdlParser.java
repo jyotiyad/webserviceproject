@@ -120,6 +120,7 @@ public class WsdlParser {
                     while (sequenceElement != null && !(sequenceElement instanceof TextImpl)) {
                         String name = getNodeNameAttributeValue(sequenceElement);
                         Parameter nestedParameter = new Parameter(name);
+                        nestedParameter.type = getNodeAttributeValue(sequenceElement, "type");
                         nestedParameter.modelReference = getNodeModelReferenceAttributeValue(sequenceElement);
                         parameter.subParameters.add(nestedParameter);
                         sequenceElement = sequenceElement.getNextSibling();
@@ -148,6 +149,7 @@ public class WsdlParser {
                             while (sequenceChild != null && !(sequenceChild instanceof TextImpl)) {
                                 String name = getNodeNameAttributeValue(sequenceChild);
                                 Parameter nestedParameter = new Parameter(name);
+                                nestedParameter.type = getNodeAttributeValue(sequenceChild, "type");
                                 nestedParameter.modelReference = getNodeModelReferenceAttributeValue(sequenceChild);
                                 parameter.subParameters.add(nestedParameter);
                                 sequenceChild = sequenceChild.getNextSibling();
@@ -229,14 +231,25 @@ public class WsdlParser {
                             if (nestedParameter != null) {
                                 parameter = nestedParameter;
                             }
+                            parameterList.add(parameter);
+                        } else if (parameter.hasSubParameters() && !parameter.hasModelReference()) {
+                            List<Parameter> subParameters = parameter.subParameters;
+                            for (Parameter subParameter : subParameters) {
+                                Parameter nestedParameter = typeParametersMap.get(subParameter.type);
+                                if (nestedParameter != null) {
+                                    parameter = nestedParameter;
+                                }
+                            }
+                            parameterList.add(parameter);
                         } else if (parameter.ref != null) {
                             Parameter nestedParameter = elementParametersMap.get(parameter.ref);
                             if (nestedParameter != null) {
                                 parameter = nestedParameter;
                             }
+                            parameterList.add(parameter);
                         }
 
-                        parameterList.add(parameter);
+
                     }
                 }
             }
